@@ -15,6 +15,7 @@ import com.github.appreciated.app.layout.component.menu.left.items.LeftSectionIt
 import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.theme.Theme;
@@ -27,10 +28,11 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
  * The main view contains a button and a template element.
  */
 
-@Push
-@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-@Theme(Material.class)
 public class MainAppLayout extends AppLayoutRouterLayout {
+    @Theme(Material.class)
+    @Push
+    @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+    public static class MainAppShellConfigurator implements AppShellConfigurator {}
 
     public MainAppLayout() {
         DefaultNotificationHolder notifications = new DefaultNotificationHolder();
@@ -50,7 +52,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
 
         Component appMenu = LeftAppMenuBuilder.get()
                 .addToSection(HEADER,
-                        new LeftHeaderItem("App-Layout", "Version 4.0.0", "/frontend/images/logo.png"),
+                        new LeftHeaderItem("App-Layout", "Version 4.0.0", "./images/logo.png"),
                         new LeftClickableItem("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
                         })
                 )

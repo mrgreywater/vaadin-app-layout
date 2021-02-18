@@ -15,6 +15,7 @@ import com.github.appreciated.card.RippleClickableCard;
 import com.github.appreciated.card.content.Item;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -29,12 +30,11 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 /**
  * The main view contains a button and a template element.
  */
-
-@Push
-@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
 
-
+    @Push
+    @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+    public static class MainAppShellConfigurator implements AppShellConfigurator {}
     public MainAppLayout() {
         // An Search overlay
         SearchOverlayButton<TestSearchResult, SerializablePredicate<TestSearchResult>> searchOverlayButton = initSearchOverlayButton();
@@ -51,7 +51,7 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                         .build())
                 .withAppMenu(LeftAppMenuBuilder.get()
                         .addToSection(HEADER,
-                                new LeftHeaderItem("Menu-Header", "Version 4.0.0", "/frontend/images/logo.png"),
+                                new LeftHeaderItem("Menu-Header", "Version 4.0.0", "./images/logo.png"),
                                 new LeftClickableItem("Clickable Entry", VaadinIcon.COG.create(), event -> Notification.show("onClick ..."))
                         )
                         .add(new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class))

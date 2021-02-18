@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.test.nestedlayout;
 
 import com.github.appreciated.app.layout.test.nestedlayout.view.View5;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
@@ -13,8 +14,11 @@ import com.vaadin.flow.router.RouterLayout;
  *
  * @author Gabriel Gecy
  */
-@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends Div implements RouterLayout, BeforeEnterObserver {
+
+    @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+    public static class MainAppShellConfigurator implements AppShellConfigurator {}
+
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         if (event.getNavigationTarget().equals(View5.class)) {

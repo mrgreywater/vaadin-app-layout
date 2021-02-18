@@ -1,10 +1,7 @@
 package com.github.appreciated.app.layout.component.applayout;
 
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.HasText;
-import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -16,7 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.server.InitialPageSettings;
-import com.vaadin.flow.server.PageConfigurator;
+import com.vaadin.flow.shared.ui.LoadMode;
 
 import java.util.Arrays;
 
@@ -24,7 +21,7 @@ public interface TopLayouts {
 
     @Tag(Top.TAG)
     @JsModule("./com/github/appreciated/app-layout/top/top.js")
-    class Top extends AppLayout implements PageConfigurator {
+    class Top extends AppLayout {
         private static final long serialVersionUID = 1L;
 
         public final static String TAG = "app-layout-top";
@@ -46,6 +43,8 @@ public interface TopLayouts {
         private boolean upNavigationEnabled;
 
         public Top() {
+            UI.getCurrent().getPage().addStyleSheet("body {overflow-x: hidden !important;}", LoadMode.INLINE);
+
             contentPanel.setSizeFull();
             getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), "app-layout"));
             appBar.add(titleWrapper, paperTabWrapper, appBarElementWrapper);
@@ -180,15 +179,11 @@ public interface TopLayouts {
             return (Component) content;
         }
 
-        @Override
-        public void configurePage(InitialPageSettings settings) {
-            settings.addInlineWithContents("body {overflow-x: hidden !important;}", InitialPageSettings.WrapMode.STYLESHEET);
-        }
     }
 
     @Tag(TopLarge.TAG)
     @JsModule("./com/github/appreciated/app-layout/top/top-large.js")
-    class TopLarge extends AppLayout implements PageConfigurator {
+    class TopLarge extends AppLayout {
     	private static final long serialVersionUID = 1L;
     	
         public final static String TAG = "app-layout-top-large";
@@ -216,6 +211,7 @@ public interface TopLayouts {
         private boolean upNavigationEnabled;
 
         public TopLarge() {
+            UI.getCurrent().getPage().addStyleSheet("body {overflow-x: hidden !important;}", LoadMode.INLINE);
             contentPanel.setSizeFull();
 
             paperTabWrapper.getElement().getStyle()
@@ -366,9 +362,5 @@ public interface TopLayouts {
             }
         }
 
-        @Override
-        public void configurePage(InitialPageSettings settings) {
-            settings.addInlineWithContents("body {overflow-x: hidden !important;}", InitialPageSettings.WrapMode.STYLESHEET);
-        }
     }
 }

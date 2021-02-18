@@ -14,6 +14,7 @@ import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.server.PWA;
@@ -23,11 +24,12 @@ import org.springframework.stereotype.Component;
 import static com.github.appreciated.app.layout.entity.Section.FOOTER;
 import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
-@Push
-@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-@PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
 @Component @UIScope // optional but useful; allows access to this instance from views, see View1.
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
+    @Push
+    @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
+    @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+    public class ShellConfigurator implements AppShellConfigurator { }
     private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     private DefaultBadgeHolder badge = new DefaultBadgeHolder(5);
 
